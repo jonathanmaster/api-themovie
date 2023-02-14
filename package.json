@@ -1,0 +1,20 @@
+{
+  "name": "api-themovie",
+  "version": "1.0.0",
+  "description": "Practicando consumo de Api rest con la Api de The Movie DB",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jonathanmaster/api-themovie.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jonathanmaster/api-themovie/issues"
+  },
+  "homepage": "https://github.com/jonathanmaster/api-themovie#readme"
+}

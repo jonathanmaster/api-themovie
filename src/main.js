@@ -1,12 +1,20 @@
+const api = axios.create({
+    baseURL : 'https://api.themoviedb.org/3/',
+    headers: {
+        'Content-Type': 'aplication/json;charset=utf-8'
+    },
+    params: {
+       'api_key' : API_KEY 
+    }
+})
 
-const getTrendingMoviesPreview = async ()=> {
-    const res = await fetch(
-        'https://api.themoviedb.org/3/trending/movie/day?api_key='+ API_KEY)
-    const data = await res.json()
-    
-    const movies = data.results
+//utils
+
+const createMovies = (movies, container) => {
+
+    container.innerHTML = '' //para no tener el error de los datos duplicados
+
     movies.forEach(movie => {
-        const trendingPreviewMoviesContainer = document.querySelector('#trendingPreview .trendingPreview-movieList')
         const movieContainer = document.createElement('div')
         movieContainer.classList.add('movie-container')
 
@@ -16,21 +24,16 @@ const getTrendingMoviesPreview = async ()=> {
         movieImg.setAttribute('src', 'https://image.tmdb.org/t/p/w300'+ movie.poster_path)
 
         movieContainer.appendChild(movieImg)
-        trendingPreviewMoviesContainer.appendChild(movieContainer)
+        container.appendChild(movieContainer)
     });
 
 }
 
+const createCategories = (categories, container) => {
 
-const getCategoriesPreview = async ()=> {
-    const res = await fetch(
-        'https://api.themoviedb.org/3/genre/movie/list?api_key='+ API_KEY)
-    const data = await res.json()
-    
-    const categories = data.genres
+    container.innerHTML = ''
+
     categories.forEach(category => {
-        const previewCategoriesContainer = document.querySelector('#categoriesPreview .categoriesPreview-list')
-
 
         const categoryContainer = document.createElement('div')
         categoryContainer.classList.add('category-container')
@@ -38,18 +41,53 @@ const getCategoriesPreview = async ()=> {
         const categoryTitle = document.createElement('h3')
         categoryTitle.classList.add('category-title')
         categoryTitle.setAttribute('id','id' + category.id)
+
+        categoryTitle.addEventListener('click', ()=>{
+            location.hash = `#category=${category.id}-${category.name}`
+        })
+
         const categoryTitleText = document.createTextNode(category.name)
 
         categoryTitle.appendChild(categoryTitleText)
         categoryContainer.appendChild(categoryTitle)
-        previewCategoriesContainer.appendChild(categoryContainer)
+        container.appendChild(categoryContainer)
     });
 
 }
 
 
-getTrendingMoviesPreview()
-getCategoriesPreview()
+//llamados a la api
+const getTrendingMoviesPreview = async ()=> {
+    const {data} = await api('trending/movie/day')
+    const movies = data.results
+
+    createMovies(movies, trendingMoviesPreviewList)
+
+}
+
+const getMoviesByCategory = async (id)=> {
+    const {data} = await api('discover/movie', {
+        params:{
+            with_genres: id
+        }
+    })
+    const movies = data.results
+
+    createMovies(movies, genericSection)
+   
+}
+
+
+const getCategoriesPreview = async ()=> {
+    const {data} = await api('genre/movie/list')
+    const categories = data.genres
+
+    createCategories(categories, categoriesPreviewList)
+
+}
+
+
+
 
 
 

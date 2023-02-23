@@ -10,8 +10,8 @@ const api = axios.create({
   },
 });
 
-//utils
 
+//utils
 const createMovies = (movies, container) => {
   container.innerHTML = ""; //para no tener el error de los datos duplicados
 

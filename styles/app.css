@@ -305,6 +305,7 @@ button {
 
 .genericList-container .movie-img {
   width: 100%;
+  min-height: 200px;
 }
 
 

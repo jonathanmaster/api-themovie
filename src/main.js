@@ -106,7 +106,7 @@ const getMovieById = async (id) => {
     const { data: movie } = await api('movie/' + id);
 
   const movieImgUrl = 'https://image.tmdb.org/t/p/w500' + movie.poster_path;
-  console.log(movieImgUrl)
+  // console.log(movieImgUrl)
   headerSection.style.background = `
     linear-gradient(
       180deg,

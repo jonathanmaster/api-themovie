@@ -18,6 +18,7 @@ Loading skeletons son elementos de diseño que se utilizan para mejorar la exper
 - Intersection Observer: 
 https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API 
 
-
+- Navigator.language:
+https://developer.mozilla.org/en-US/docs/Web/API/Navigator/language
 
 
